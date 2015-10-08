@@ -31,6 +31,7 @@ module Rack
       request_method = request.request_method.to_s.downcase
       options = {
         headers: extract_http_headers(env),
+        body: request.body,
       }.merge(@options)
       response = Excon.public_send(
         request_method,

@@ -30,6 +30,12 @@ RSpec.describe Rack::Forwarder do
 
       get "/foo"
     end
+
+    it "forwards the body" do
+      Excon.stub({url: "http://example.com/foo", body: '{foo: "bar"}'}, status: 200)
+
+      post "/foo", '{foo: "bar"}'
+    end
   end
 
   context "capture groups" do
